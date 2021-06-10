@@ -10,6 +10,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
+
+            //preparación
             List<int> notas = new List<int>();
 
             notas.Add(0);
@@ -26,11 +28,13 @@ namespace UnitTestProject1
             int notE = 2;
             int sbrE = 1;
 
-            public double notas.calcEst(notas);
+            //para probar
+            notas.calcEst(notas);
 
-            media = notas.media;
+            double media = notas.Media;
 
-            assertEquals(mediaEsperada, media);
+            //Comprobación
+            assert.AreEqual(mediaEsperada, media);
         }
     }
 }
