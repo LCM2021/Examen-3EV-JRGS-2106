@@ -25,6 +25,12 @@ namespace UnitTestProject1
             int aprE = 1;
             int notE = 2;
             int sbrE = 1;
+
+            public double notas.calcEst(notas);
+
+            media = notas.media;
+
+            assertEquals(mediaEsperada, media);
         }
     }
 }
