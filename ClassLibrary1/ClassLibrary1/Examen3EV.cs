@@ -5,14 +5,14 @@ namespace Examen3EV_NS
     /// <summary>
     /// esta clase nos calcula las estadísticas de un conjunto de notas 
     /// </summary>
-    public class estNot
+    public class EstNot
     {
         private int suspendidos;  // Suspensos
         private int aprobados;  // Aprobados
         private int notables;  // Notables
         private int sobresalientes;  // Sobresalientes
 
-        public double media; // Nota media
+        private double media; // Nota media
 
         public int Suspendidos
         {
@@ -34,51 +34,36 @@ namespace Examen3EV_NS
             get => sobresalientes;
             set => sobresalientes = value;
         }
+        public double meida
+        {
+            get => media;
+            set => media = value;
+        }
 
         ///<summary>
         ///Constructor vacío
         ///</summary>
-        public estNot ()
+        public EstNot ()
         {
-            Suspendidos = Aprobados = Notables = Sobresalientes = 0;  // inicializamos las variables
-            media = 0.0;
+            ///<summary>inicializamos las variables</summary> 
+            suspendidos = aprobados = notables = sobresalientes = 0;  
+            meida = 0.0;
         }
 
 
         ///<summary>
         ///Constructor a partir de un array, calcula las estadísticas al crear el objeto
         ///</summary>
-        public estNot (List<int> listnot)
+        public EstNot (List<int> listnot)
         {
-            media = 0.0;
+            meida = 0.0;
 
             for (int i = 0; i < listnot.Count; i++)
             {
-                if (listnot[i] < 5)
-                {
-                    Suspendidos++;
-                }
-
-                // Por debajo de 5 suspenso
-                else if (listnot[i] > 5 && listnot[i] < 7)
-                {
-                    Aprobados++; //Nota para aprobar: 5
-                }
-
-                else if (listnot[i] > 7 && listnot[i] < 9)
-                {
-                    Notables++; // Nota para notable: 7
-                }
-
-                else if (listnot[i] > 9)
-                {
-                    Sobresalientes++; // Nota para sobresaliente: 9
-                }
-                    
-                media = media + listnot[i];
+                CandidadesCadaNota(listnot, i);
             }
 
-            media = media / listnot.Count;
+            meida = meida / listnot.Count;
         }
 
 
@@ -86,15 +71,14 @@ namespace Examen3EV_NS
         /// <para>Para un conjunto de listnot, calculamos las estadísticas</para>
         /// <para>calcula la media y el número de suspensos/aprobados/notables/sobresalientes</para>
         /// </summary>
-        /// <param name="listnot"></param>
         /// <returns>El método devuelve -1 si ha habido algún problema, la media en caso contrario</returns>
 
         public double CalcEst (List<int> listnot)
         {
-            media = 0.0;
+            meida = 0.0;
 
             // TODO: hay que modificar el tratamiento de errores para generar excepciones
-            // Si la lista no contiene elementos, devolvemos un error
+            ///<exception>Si la lista no contiene elementos, devolvemos un error</exception>
             if (listnot.Count <= 0)
             {
                 return -1;
@@ -112,35 +96,40 @@ namespace Examen3EV_NS
             for (int i = 0; i < listnot.Count; i++)
             {
                 ///<summary><paramref name="listnot">notas</paramref>Por debajo de 5 suspenso</summary> 
-                if (listnot[i] < 5)
-                {
-                    Suspendidos++;
-                }
-
-                ///<summary><paramref name="listnot">notas</paramref> para aprobar: 5</summary> 
-                else if (listnot[i] >= 5 && listnot[i] < 7)
-                {
-                    Aprobados++;
-                }
-
-                ///<summary><paramref name="listnot">notas</paramref> para notable: 7</summary> 
-                else if (listnot[i] >= 7 && listnot[i] < 9)
-                {
-                    Notables++;
-                }
-
-                ///<summary><paramref name="listnot">notas</paramref> para sobresaliente: 9</summary> 
-                else if (listnot[i] > 9)
-                {
-                    Sobresalientes++;
-                }
-
-                media = media + listnot[i];
+                CandidadesCadaNota(listnot, i);
             }
 
-            media = media / listnot.Count;
+            meida = meida / listnot.Count;
 
-            return media;
+            return meida;
+        }
+
+        private void CandidadesCadaNota (List<int> listnot, int i)
+        {
+            if (listnot[i] < 5)
+            {
+                suspendidos++;
+            }
+
+            ///<summary><paramref name="listnot">notas</paramref> para aprobar: 5</summary> 
+            else if (listnot[i] >= 5 && listnot[i] < 7)
+            {
+                aprobados++;
+            }
+
+            ///<summary><paramref name="listnot">notas</paramref> para notable: 7</summary> 
+            else if (listnot[i] >= 7 && listnot[i] < 9)
+            {
+                notables++;
+            }
+
+            ///<summary><paramref name="listnot">notas</paramref> para sobresaliente: 9</summary> 
+            else if (listnot[i] > 9)
+            {
+                sobresalientes++;
+            }
+
+            meida = meida + listnot[i];
         }
     }
 }

@@ -23,18 +23,18 @@ namespace UnitTestProject1
             notas.Add(8);
 
             double mediaEsperada = 5.143;
-            int susE = 3;
-            int aprE = 1;
-            int notE = 2;
-            int sbrE = 1;
+            int suspendidosEsperados = 3;
+            int aprobadosEsperados = 1;
+            int notablesEsperados = 2;
+            int sobresalientesEsperados = 1;
 
             //para probar
-            notas.calcEst(notas);
+            notas.calcEst(notas.List<int>);
 
             double media = notas.Media;
 
             //Comprobación
-            assert.AreEqual(mediaEsperada, media);
+            Assert.AreEqual(mediaEsperada, media);
         }
     }
 }
